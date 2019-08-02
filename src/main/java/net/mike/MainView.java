@@ -1,8 +1,6 @@
 package net.mike;
 
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.router.Route;
@@ -19,7 +17,15 @@ public class MainView extends HorizontalLayout {
         Button b2 = new Button("Sign up");
         	   add(b1);
                add(b2);
-               getElement().getStyle().set("margin-top", "200px");
-               getElement().getStyle().set("margin-left", "525px");
+               getElement().getStyle().set("position", "absolute");
+               getElement().getStyle().set("margin-top", "1%");
+               getElement().getStyle().set("margin-left", "84%");
+               b1.addClickListener( e-> { 
+            	   b1.getUI().ifPresent(ui -> ui.navigate("signin")); 
+               });
+               b2.addClickListener( e-> { 
+            	   b2.getUI().ifPresent(ui -> ui.navigate("signup")); 
+               });
     }
 }
+
