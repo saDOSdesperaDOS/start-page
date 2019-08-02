@@ -4,6 +4,9 @@
 *.iml
 *.png
 *.properties
+*.settings
+*.classpath
+*.project
 /.idea/
 /out/
 /target/
