@@ -1,7 +1,5 @@
 package net.mike.logic;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import net.mike.dao.EmailsRegList;
 import net.mike.dao.EmailsRegListImpl;
