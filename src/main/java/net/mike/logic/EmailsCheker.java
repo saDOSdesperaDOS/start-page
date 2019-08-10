@@ -1,21 +1,33 @@
 package net.mike.logic;
 
-
 import net.mike.dao.EmailsRegList;
 import net.mike.dao.EmailsRegListImpl;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
-public class EmailsChaker {
+public class EmailsCheker {
 	
-	private static String email;
+	//private  String email;
 	private boolean isContains;
+	
+	
     
-	public static String getEmail() {
-		return email;
-	}
+	//public  String getEmail() {
+		//return email;
+	//}
 
-	public static void setEmail(String email) {
-		EmailsChaker.email = email;
+	//public void setEmail(String email) {
+	//	this.email = email;
+	//}
+	public EmailsCheker() {
+		super();
 	}
 
 	public boolean isContains() {
@@ -30,8 +42,6 @@ public class EmailsChaker {
 	public boolean check(String email) {
 		//-if true сравниваем его с каждым email'om из таблицы Emails 
 		//если содержит то лови Exception, а если нет такого email'a то отправляем на него проверочный код
-		//
-		//
 		EmailsRegList massiv = new EmailsRegListImpl();
 
      		if(!massiv.getAll(). contains(email)) {
@@ -43,4 +53,17 @@ public class EmailsChaker {
               }
     return isContains;
     }
+	
+	
+	//Отправляем код проверки на указаную почту 
+
+	public void sendVeriCodeTo(String email) {
+		
+   	  EmailsCheker checker = new EmailsCheker();
+   	  checker.check(email);
+		
+	  while(!checker.isContains) {
+			System.out.println("отправляем проверочный код на указанную почту");
+	  }
+	}
 }

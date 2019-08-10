@@ -9,9 +9,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 @Route("signup")
-public class SignUpForm extends VerticalLayout {
+public class SignUpFormView extends VerticalLayout {
 	
-	public SignUpForm() {
+	public SignUpFormView() {
 		
 		FormLayout form = new FormLayout();
 		TextField name = new TextField("Name");
