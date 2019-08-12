@@ -11,7 +11,7 @@ public class EmailCheckView extends Div {
   public EmailCheckView() {
 	  EmailField email = new EmailField("Email");
 	  EmailsCheker checker = new EmailsCheker();
-	  Button sendEmail = new Button("Send", click -> checker.sendVeriCodeTo(email.getValue()));
+	  Button sendEmail = new Button("Send", click -> checker.check(email.getValue()));
 	  //sendEmail.addClickListener( e-> { 
    	   //sendEmail.getUI().ifPresent(ui -> ui.navigate("signup")); 
       //});

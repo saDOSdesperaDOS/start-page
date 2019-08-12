@@ -3,7 +3,10 @@ package net.mike;
 import net.mike.logic.EmailsCheker;
 
 public class Test {
-	
-	EmailsCheker emailsCheker;	
-		
+  public static void main(String[] fuck) {
+	EmailsCheker emailsChecker = new EmailsCheker();
+	System.out.println(emailsChecker.isContains());
+	emailsChecker.check("email1@google.com");
+	System.out.println(emailsChecker.isContains());
+  }
 }

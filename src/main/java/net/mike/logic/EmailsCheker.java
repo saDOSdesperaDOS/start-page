@@ -10,22 +10,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import com.vaadin.flow.data.validator.EmailValidator;
 
 
 public class EmailsCheker {
 	
 	//private  String email;
 	private boolean isContains;
-	
-	
+	private EmailValidator eValidator = new EmailValidator("Dont RIGTH email!!!!");
     
-	//public  String getEmail() {
-		//return email;
-	//}
-
-	//public void setEmail(String email) {
-	//	this.email = email;
-	//}
 	public EmailsCheker() {
 		super();
 	}
@@ -34,36 +27,23 @@ public class EmailsCheker {
 		return isContains;
 	}
 
-	public void setContains(boolean yes) {
-		yes = true;
-		isContains = yes;
+	public void changeContains() {
+		isContains = true;
 	}
 
-	public boolean check(String email) {
+	public void check(String email) {
 		//-if true сравниваем его с каждым email'om из таблицы Emails 
 		//если содержит то лови Exception, а если нет такого email'a то отправляем на него проверочный код
-		EmailsRegList massiv = new EmailsRegListImpl();
-
-     		if(!massiv.getAll(). contains(email)) {
-              System.out.println("Чтобы закончить регистрацию, подтвердите число, которое было отправленно на указанный вами Email. ");
-              isContains = true;
+		EmailsRegList eList = new EmailsRegListImpl();
+     		if(!eList.getAll(). contains(email)) {
+              System.out.println("В списке зарегистрированых email'ов данный email отсутствует. Далее необходимо отправить на него проверочный код");
             } else {
-            	System.out.println(email + " is busy");    
-            	isContains = false;
+            	isContains = true;
+            	System.out.println(email + " is busy");
               }
-    return isContains;
     }
 	
-	
-	//Отправляем код проверки на указаную почту 
-
-	public void sendVeriCodeTo(String email) {
+	public void send() {
 		
-   	  EmailsCheker checker = new EmailsCheker();
-   	  checker.check(email);
-		
-	  while(!checker.isContains) {
-			System.out.println("отправляем проверочный код на указанную почту");
-	  }
 	}
 }
