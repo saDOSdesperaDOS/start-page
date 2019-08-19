@@ -52,13 +52,17 @@ public class EmailsCheker {
 		isContains = true;
 	}
 
+	
+	//Проверяем email на regex и на busy 
 	public void check(String email) {
+		
 		//-if true сравниваем его с каждым email'om из таблицы Emails 
 		//если содержит то лови Exception, а если нет такого email'a то отправляем на него проверочный код
+		
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
               System.out.println("В списке зарегистрированых email'ов данный email отсутствует. Далее необходимо отправить на него проверочный код");
-             
+             this.send(email);
      		
      		} else {
             	isContains = true;
@@ -73,15 +77,15 @@ public class EmailsCheker {
 		return validExp;
 		}
 	
-	
-	
-	public void send(String email, String code) {
-		
+	public void send(String email) {
+		CodeGenerator cD = new CodeGenerator();
+		String verifyCode = cD.getVerifyCode();
+		System.out.println(verifyCode);
 	}
 	
 	public boolean verify(String code) {
 		String responseCode = null;
-		this.send("email", code);
+		this.send("email");
 		
 		if(code.equals(responseCode)) {
 			isVerify = true;

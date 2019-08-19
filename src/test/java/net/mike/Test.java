@@ -8,5 +8,6 @@ public class Test {
 	System.out.println(emailsChecker.isContains());
 	emailsChecker.check("emawdqwqil1@google.com");
 	System.out.println(emailsChecker.isContains());
+	emailsChecker.send("jgujhbhjbj");
   }
 }
