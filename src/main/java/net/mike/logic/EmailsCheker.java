@@ -2,7 +2,8 @@ package net.mike.logic;
 
 import net.mike.dao.EmailsRegList;
 import net.mike.dao.EmailsRegListImpl;
-import java.util.Properties;
+import net.mike.views.EmailCheckView;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,9 +20,26 @@ import com.vaadin.flow.data.validator.EmailValidator;
 public class EmailsCheker {
 	
 	//private  String email;
-	private boolean isContains;
-	private EmailValidator eValidator = new EmailValidator("Dont RIGTH email!!!!");
+	private boolean isContains, isVerify;
+	private String code;
+	//private EmailValidator eValidator = new EmailValidator("Dont RIGTH email!!!!");
     
+	public boolean isVerify() {
+		return isVerify;
+	}
+
+	public void setVerify(boolean isVerify) {
+		this.isVerify = isVerify;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public EmailsCheker() {
 		super();
 	}
@@ -40,7 +58,9 @@ public class EmailsCheker {
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
               System.out.println("В списке зарегистрированых email'ов данный email отсутствует. Далее необходимо отправить на него проверочный код");
-            } else {
+             
+     		
+     		} else {
             	isContains = true;
             	System.out.println(email + " is busy");
               }
@@ -53,7 +73,19 @@ public class EmailsCheker {
 		return validExp;
 		}
 	
-	public void send() {
+	
+	
+	public void send(String email, String code) {
 		
+	}
+	
+	public boolean verify(String code) {
+		String responseCode = null;
+		this.send("email", code);
+		
+		if(code.equals(responseCode)) {
+			isVerify = true;
+		}
+		return isVerify;
 	}
 }
