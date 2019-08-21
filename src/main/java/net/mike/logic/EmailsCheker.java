@@ -21,27 +21,36 @@ public class EmailsCheker {
 	
 	//private  String email;
 	private boolean isContains, isVerify;
-	private String code;
+	//private String code;
+	private String verifyCode, responseCode;
 	//private EmailValidator eValidator = new EmailValidator("Dont RIGTH email!!!!");
     
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+
+	public void setContains(boolean isContains) {
+		this.isContains = isContains;
+	}
+
+	public String getResponseCode() {
+		return responseCode;
+	}
+
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
+
 	public boolean isVerify() {
 		return isVerify;
 	}
 
 	public void setVerify(boolean isVerify) {
 		this.isVerify = isVerify;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public EmailsCheker() {
-		super();
 	}
 
 	public boolean isContains() {
@@ -51,23 +60,21 @@ public class EmailsCheker {
 	public void changeContains() {
 		isContains = true;
 	}
-
-	
+    
 	//Проверяем email на regex и на busy 
-	public void check(String email) {
+	public boolean check(String email) {
 		
 		//-if true сравниваем его с каждым email'om из таблицы Emails 
 		//если содержит то лови Exception, а если нет такого email'a то отправляем на него проверочный код
-		
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
-              System.out.println("В списке зарегистрированых email'ов данный email отсутствует. Далее необходимо отправить на него проверочный код");
-             this.send(email);
+              CodeGenerator cD = new CodeGenerator();
+      	      verifyCode = cD.getVerifyCode();
      		
      		} else {
             	isContains = true;
-            	System.out.println(email + " is busy");
               }
+     		return isContains;
     }
 	
 	public boolean regExpValidator(String email) {
@@ -78,18 +85,14 @@ public class EmailsCheker {
 		}
 	
 	public void send(String email) {
-		CodeGenerator cD = new CodeGenerator();
-		String verifyCode = cD.getVerifyCode();
-		System.out.println(verifyCode);
+		
+		
 	}
 	
-	public boolean verify(String code) {
-		String responseCode = null;
-		this.send("email");
-		
-		if(code.equals(responseCode)) {
+	public boolean verify(String responseCode) {
+		if(verifyCode.equals(responseCode)) {
 			isVerify = true;
 		}
-		return isVerify;
+	return isVerify;
 	}
 }
