@@ -14,9 +14,14 @@ public class EmailCheckView extends Div {
 	  
 	  EmailField email = new EmailField("Email");
 	  EmailsCheker checker = new EmailsCheker();
-	  Button checkEmail = new Button("Check", click -> (checker.check(email.getValue()) == false) ? checkEmail.addClickListener( e-> { checkEmail.getUI().ifPresent(ui 
-	   			   -> ui.navigate("confirm")}) : Notification.show("Такой email уже существует или вы допустили ошибку при вводе")
-			  );
+	  Button checkEmail = new Button("Check", click -> {if (checker.check(email.getValue()) == false) {
+		  System.out.println("false");
+	  }
+		  else {
+			  System.out.println("error");  
+		  }
+	  });
+	  
 	  
 	  
 	  setWidth("25%");

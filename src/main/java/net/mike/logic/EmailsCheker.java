@@ -64,18 +64,14 @@ public class EmailsCheker {
 	//Проверяем email на regex и на busy 
 	public boolean check(String email) {
 		
-		//-if true сравниваем его с каждым email'om из таблицы Emails 
-		//если содержит то лови Exception, а если нет такого email'a то отправляем на него проверочный код
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
-              CodeGenerator cD = new CodeGenerator();
-      	      verifyCode = cD.getVerifyCode();
-     		
+              this.send(email);
      		} else {
             	isContains = true;
               }
-     		return isContains;
-    }
+     return isContains;
+     }
 	
 	public boolean regExpValidator(String email) {
 		Pattern p = Pattern.compile("^(.+)@(.+)$");
@@ -85,7 +81,9 @@ public class EmailsCheker {
 		}
 	
 	public void send(String email) {
-		
+		CodeGenerator cD = new CodeGenerator();
+	    verifyCode = cD.getVerifyCode();
+	    System.out.println("Подтвердите проверочный код:  - " + verifyCode);
 		
 	}
 	

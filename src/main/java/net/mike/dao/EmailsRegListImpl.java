@@ -11,10 +11,10 @@ public class EmailsRegListImpl implements EmailsRegList {
 		// создаем экземпляр списка(new EmaisRegList())
 		List<String> busyEmails = new ArrayList<String>();
 		// добавляем в него элементы из таблицы
-		String e1 = "email1@google.com";
+		String e1 = "emai31@google.com";
 		String e2 = "email1@mail.com";
-		String e3 = "email1@google.com";
-		String e4 = "email1@google.com";
+		String e3 = "emaileqrg@google.com";
+		String e4 = "emailqedfhb@google.com";
 		String e5 = "email1@yandex.com";
 		String e6 = "email1@yahoo.com";
 		String e7 = "email1@google.com";
