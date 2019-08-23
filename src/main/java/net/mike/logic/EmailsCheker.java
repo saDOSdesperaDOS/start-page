@@ -14,6 +14,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.validator.EmailValidator;
 
 
@@ -66,9 +68,11 @@ public class EmailsCheker {
 		
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
-              this.send(email);
+              send(email);
+              Notification.show("Verification code sent to your email");
      		} else {
             	isContains = true;
+            	Notification.show("Email busy or There was a mistake while entering Email");
               }
      return isContains;
      }
