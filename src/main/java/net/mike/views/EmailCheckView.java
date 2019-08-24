@@ -14,13 +14,19 @@ public class EmailCheckView extends Div {
 	  
 	  EmailField email = new EmailField("Email");
 	  EmailsCheker checker = new EmailsCheker();
-	  Button checkEmail = new Button("Check", click -> checker.check(email.getValue()));
-	  
+	  Button checkEmailButton = new Button("Check", click -> {
+	  														checker.check(email.getValue());
+	  										            	if(checker.isContains() == false) 
+	  										            		this.addClickListener( e-> {
+	  										            		this.getUI().ifPresent(ui -> ui.navigate("confirm"));
+	  										            		}
+	  										            		);
+	  										            	});
 	  setWidth("25%");
 	  setHeight("65%");
 	  getElement().getStyle().set("position", "absolute");
 	  getElement().getStyle().set("margin-top", "5%");
 	  getElement().getStyle().set("margin-left", "37%");
-	  add(email, checkEmail);
+	  add(email, checkEmailButton);
   }
 }

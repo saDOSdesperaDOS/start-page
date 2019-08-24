@@ -68,8 +68,12 @@ public class EmailsCheker {
 		
 		EmailsRegList eList = new EmailsRegListImpl();
      		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
-              send(email);
+              isContains = false;
+     			send(email);
               Notification.show("Verification code sent to your email");
+              new EmailCheckView().addClickListener( e-> { 
+            	  new EmailCheckView().getUI().ifPresent(ui -> ui.navigate("signin")); 
+              });
      		} else {
             	isContains = true;
             	Notification.show("Email busy or There was a mistake while entering Email");
