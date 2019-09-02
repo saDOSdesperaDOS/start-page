@@ -9,31 +9,26 @@ import net.mike.logic.EmailsCheker;
 
 @Route("check")
 public class EmailCheckView extends Div {
-	EmailField email;
-	EmailsCheker checker;
-	Button checkEmailButton;
+	
 	public EmailCheckView() {
 	  
-		 email = new EmailField("Email");
-		 checker = new EmailsCheker();
-		 checkEmailButton = new Button("Check", click -> {
-	  										            	checkView(email.getValue());
-	  										            	});
-	  setWidth("25%");
-	  setHeight("65%");
-	  getElement().getStyle().set("position", "absolute");
-	  getElement().getStyle().set("margin-top", "5%");
-	  getElement().getStyle().set("margin-left", "37%");
-	  add(email, checkEmailButton);
-  }
+		EmailField email = new EmailField("Email");
+		Button checkEmailButton = new Button("Check");
+		String a = "a"; 
+		
+		add(email, checkEmailButton);
+	//ТАК ОБРАБОТЧИК СОБЫТИЯ РАБОТАЕТ С ПЕРВОГО РАЗА	 
+		   checkEmailButton.addClickListener( e-> {
+			   									if(true) checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
+	      	    							  });
+		 
+		     			setWidth("25%");
+		     			setHeight("65%");
+		     			getElement().getStyle().set("position", "absolute");
+		     			getElement().getStyle().set("margin-top", "5%");
+		     			getElement().getStyle().set("margin-left", "37%");
+		     			
+   }
 	
-	public boolean checkView(String email) {
-		boolean value = false;
-		if(checker.check(email) == false) 
-      		addClickListener( e-> {
-      		getUI().ifPresent(ui -> ui.navigate("confirm"));
-      		}
-      		);
-		return value;
-	}
+	
 }
