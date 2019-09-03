@@ -1,10 +1,17 @@
 package net.mike.views;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.router.Route;
+
+import net.mike.dao.EmailsRegList;
+import net.mike.dao.EmailsRegListImpl;
+import net.mike.logic.CodeGenerator;
 import net.mike.logic.EmailsCheker;
 
 @Route("check")
@@ -19,7 +26,7 @@ public class EmailCheckView extends Div {
 		add(email, checkEmailButton);
 	//ТАК ОБРАБОТЧИК СОБЫТИЯ РАБОТАЕТ С ПЕРВОГО РАЗА	 
 		   checkEmailButton.addClickListener( e-> {
-			   									if(true) checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
+			   									if(check(email.getValue())) checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
 	      	    							  });
 		 
 		     			setWidth("25%");
@@ -30,5 +37,29 @@ public class EmailCheckView extends Div {
 		     			
    }
 	
-	
+	//Проверяем email на regex и на busy 
+		public boolean check(String email) {
+			
+			EmailsRegList eList = new EmailsRegListImpl();
+	     		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
+	     			send(email);
+	              //Notification.show("Verification code sent to your email");
+	              return true;
+	     		} else 
+	            	//Notification.show("Email busy or There was a mistake while entering Email");
+	     return false;
+	     }
+		
+		public boolean regExpValidator(String email) {
+			Pattern p = Pattern.compile("^(.+)@(.+)$");
+			Matcher m = p.matcher(email);
+			return m.matches();
+			}
+		
+		public void send(String email) {
+			CodeGenerator cD = new CodeGenerator();
+		    System.out.println("Подтвердите проверочный код:  - " + cD.getVerifyCode());
+			
+		}
+		
 }
