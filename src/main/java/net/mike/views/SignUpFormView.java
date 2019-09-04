@@ -20,7 +20,7 @@ public class SignUpFormView extends VerticalLayout {
 		PasswordField confirmPass = new PasswordField("Confirm Password");
 		Button b = new Button("Register");
 		
-		  form.add(name, email, pass, confirmPass, b);
+		  form.add(name, pass, confirmPass, b);
 		  setWidth("25%");
 		  setHeight("65%");
 		  getElement().getStyle().set("position", "absolute");

@@ -4,13 +4,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import net.mike.logic.EmailsCheker;
 
 @Route("confirm")
 public class EmailConfirmView extends Div {
   
 	public  EmailConfirmView() {
-		
 		
 		//EmailsCheker checker = new EmailsCheker();
 	    TextField verifyCode = new TextField("Insert verify code");
