@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
-    <persistence-unit name="Entities" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="PersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-        <class>com.alexauto.autocat.entities.AutoPart</class>
+        <class>net.mike.entities.Account</class>
         <properties>
             <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/carshop"/>
             <property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
