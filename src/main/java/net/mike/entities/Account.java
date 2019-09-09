@@ -1,7 +1,5 @@
 package net.mike.entities;
 
-import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.PasswordField;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,30 +8,38 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="accounts")
-@NamedQuery(name = "Account.getAll", query = "SELECT p FROM Account p")
+@Table(name="account")
+@NamedQuery(name = "Account.getAll", query = "SELECT P FROM Account P")
 public class Account implements Serializable {
 	
 	@Id
     @Column(name = "id")
 	private int id;
 	@Column(name = "email")
-	private EmailField email;
+	private String email;
 	@Column(name = "password")
-	private PasswordField password;
+	private String password;
 	@Column(name = "name")
 	private String name;
 	
-	public EmailField getEmail() {
+	public Account() {}
+	public Account(String email, String password, String name) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.name = name;
+	}
+	
+	public String getEmail() {
 		return email;
 	}
-	public void setEmail(EmailField email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	public PasswordField getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(PasswordField password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public String getName() {
@@ -42,16 +48,8 @@ public class Account implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Account(EmailField email, PasswordField password, String name) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.name = name;
-	}
-	public Account() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

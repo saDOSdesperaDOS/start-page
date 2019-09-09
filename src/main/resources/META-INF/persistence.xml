@@ -10,7 +10,6 @@
             <property name="openjpa.ConnectionUserName" value="root"/>
             <property name="openjpa.ConnectionPassword" value="QwerTyui9988"/>
             <property name="openjpa.Log" value="DefaultLevel=TRACE, Tool=INFO"/>
-           
             <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
         </properties>
     </persistence-unit>
