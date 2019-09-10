@@ -11,6 +11,7 @@ import com.vaadin.flow.router.Route;
 
 import net.mike.services.EmailsRegListService;
 import net.mike.services.EmailsRegListServiceImpl;
+import net.mike.entities.Account;
 import net.mike.logic.CodeGenerator;
 
 @Route("check")
@@ -25,7 +26,11 @@ public class EmailCheckView extends Div {
 		add(email, checkEmailButton);
 	//ТАК ОБРАБОТЧИК СОБЫТИЯ РАБОТАЕТ С ПЕРВОГО РАЗА	 
 		   checkEmailButton.addClickListener( e-> {
-			   									if(check(email.getValue())) checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
+			   									if(check(email.getValue())) {
+			   										Account.getInstance().setEmail(email.getValue());
+			   										checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
+			   										
+			   									}
 	      	    							  });
 		     			setWidth("25%");
 		     			setHeight("65%");

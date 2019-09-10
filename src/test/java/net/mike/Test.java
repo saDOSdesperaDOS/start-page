@@ -18,8 +18,8 @@ public class Test {
       String email = "sdfs@gmail.com";
 	  String password = "qwscw2eWqwe";
       String name = "Vasia";
-      Account account = new Account(email, password, name);
-      AccountsService sqlRequest = new AccountsService();
-      sqlRequest.create(account);
+     // Account account = new Account(email, password, name);
+     /* AccountsService sqlRequest = new AccountsService();
+      sqlRequest.create(account);*/
   }
 }

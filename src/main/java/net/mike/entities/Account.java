@@ -22,14 +22,21 @@ public class Account implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	public Account() {}
-	public Account(String email, String password, String name) {
+	private static Account _instance = null;
+	protected Account() {}
+	/*public Account(String email, String password, String name) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.name = name;
-	}
+	}*/
 	
+
+    public static synchronized Account getInstance() {
+        if (_instance == null)
+            _instance = new Account();
+        return _instance;
+    }
 	public String getEmail() {
 		return email;
 	}

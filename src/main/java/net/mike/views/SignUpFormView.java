@@ -22,16 +22,14 @@ public class SignUpFormView extends VerticalLayout {
 		EmailField email = new EmailField("Email");
 		PasswordField pass = new PasswordField("Password");
 		PasswordField confirmPass = new PasswordField("Confirm Password");
-		Account acc = new Account("ergergerg@werg.com", "dwsvsdv", "Vasia");
-		Account acc1 = new Account("ergergrferferg@werg.com", "derfwsvsdv", "Kolya");
+		
 		AccountsService accountsService = new AccountsService();
 		Button b = new Button("Register");
 		
 		  form.add(name, pass, confirmPass, b);
 		  b.addClickListener( e-> {
-			  		accountsService.create(acc1);
-			  		accountsService.create(acc);
-					Notification.show("Ваш аккаунт создан");
+			  		
+					Notification.show(Account.getInstance().getEmail());
 			  });
 		  setWidth("25%");
 		  setHeight("65%");
