@@ -19,18 +19,20 @@ public class SignUpFormView extends VerticalLayout {
 		
 		FormLayout form = new FormLayout();
 		TextField name = new TextField("Name");
-		EmailField email = new EmailField("Email");
 		PasswordField pass = new PasswordField("Password");
 		PasswordField confirmPass = new PasswordField("Confirm Password");
-		
+		/*create an instance that provides methods for servicing the Account entity*/
 		AccountsService accountsService = new AccountsService();
 		Button b = new Button("Register");
 		
 		  form.add(name, pass, confirmPass, b);
 		  b.addClickListener( e-> {
-			  		
-					Notification.show(Account.getInstance().getEmail());
+			  		Account.getInstance().setPassword(pass.getValue());
+			  		Account.getInstance().setName(name.getValue());
+					accountsService.create(Account.getInstance());
+					Notification.show("Your account created.");
 			  });
+		  
 		  setWidth("25%");
 		  setHeight("65%");
 		  getElement().getStyle().set("position", "absolute");

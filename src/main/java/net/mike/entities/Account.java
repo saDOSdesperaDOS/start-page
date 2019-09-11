@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="account")
@@ -15,6 +16,10 @@ public class Account implements Serializable {
 	@Id
     @Column(name = "id")
 	private int id;
+	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+	        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+	        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	             message="{invalid.email}")
 	@Column(name = "email")
 	private String email;
 	@Column(name = "password")
@@ -37,6 +42,7 @@ public class Account implements Serializable {
             _instance = new Account();
         return _instance;
     }
+
 	public String getEmail() {
 		return email;
 	}
@@ -96,7 +102,10 @@ public class Account implements Serializable {
 		return true;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + "]";
+	}
 	
 	
 }
