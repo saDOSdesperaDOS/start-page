@@ -1,4 +1,4 @@
-package net.mike.logic;
+package net.mike.services;
 
 import java.util.Random;
 
@@ -21,5 +21,4 @@ public class CodeGenerator {
 	public void setVerifyCode(String verifyCode) {
 		this.verifyCode = verifyCode;
 	}
-
 }
