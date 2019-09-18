@@ -70,7 +70,7 @@ public class EmailCheckView extends Div {
 			}
 		
 		public void send(String email) {
-			CodeGenerator cD = new CodeGenerator();
+			
 		    //System.out.println("Подтвердите проверочный код:  - " + cD.getVerifyCode());
 			  String password = "<vc39hec";
 		      final String to = email;
@@ -94,7 +94,7 @@ public class EmailCheckView extends Div {
 				   message.setFrom(new InternetAddress(from));
 				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			       message.setSubject("Veryfing your email");
-			       message.setText(cD.getVerifyCode());
+			       message.setText(CodeGenerator.getInstance());
 			       Transport.send(message);
 			       } catch (AddressException e) {
 				            e.printStackTrace();
