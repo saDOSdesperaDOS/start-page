@@ -29,12 +29,12 @@ public class Account implements Serializable {
 	
 	private static Account _instance = null;
 	protected Account() {}
-	/*public Account(String email, String password, String name) {
+	public Account(String email, String password, String name) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.name = name;
-	}*/
+	}
 	
 
     public static synchronized Account getInstance() {

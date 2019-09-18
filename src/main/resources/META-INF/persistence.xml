@@ -7,7 +7,7 @@
 		<class>net.mike.entities.Account</class>
 		<properties>
 			<property name="openjpa.ConnectionURL"
-					  value="jdbc:mysql://localhost:3306/list-of-registered-accounts" />
+					  value="jdbc:mysql://localhost:3306/registered-accounts" />
 			<property name="openjpa.ConnectionDriverName"
 					  value="com.mysql.jdbc.Driver" />
 			<property name="openjpa.ConnectionUserName" 

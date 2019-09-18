@@ -4,7 +4,6 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -13,7 +12,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.*; 
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -22,9 +20,8 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.router.Route;
 
 import net.mike.entities.Account;
+import net.mike.services.AccountsService;
 import net.mike.services.CodeGenerator;
-import net.mike.services.EmailsRegListService;
-import net.mike.services.EmailsRegListServiceImpl;
 
 @Route("check")
 public class EmailCheckView extends Div {
@@ -39,15 +36,8 @@ public class EmailCheckView extends Div {
 	//ТАК ОБРАБОТЧИК СОБЫТИЯ РАБОТАЕТ С ПЕРВОГО РАЗА	 
 		   checkEmailButton.addClickListener( e-> {
 			   										if(check(email.getValue())) {
-			   											try {
+			   										
 															send(email.getValue());
-														} catch (AddressException e1) {
-															// TODO Auto-generated catch block
-															e1.printStackTrace();
-														} catch (MessagingException e1) {
-															// TODO Auto-generated catch block
-															e1.printStackTrace();
-														}
 			   											Account.getInstance().setEmail(email.getValue());
 			   											checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
 			   										}
@@ -62,27 +52,28 @@ public class EmailCheckView extends Div {
 	
 	//Проверяем email на regex и на busy 
 		public boolean check(String email) {
-			EmailsRegListService eList = new EmailsRegListServiceImpl();
-	     		if(regExpValidator(email)&&!eList.getAll(). contains(email)) {
-	     			//send(email);
-	              //Notification.show("Verification code sent to your email");
+			AccountsService eList = new AccountsService();
+	     		if(regExpValidator(email)&&!eList.getAllEmail().contains(email)) {
+						send(email);
+	              Notification.show("Verification code sent to your email");
 	              return true;
-	     		} else 
-	            	Notification.show("Email busy or There was a mistake while entering Email");
-	     return false;
+	     		} else {
+	              Notification.show("Email busy or There was a mistake while entering Email");
+                return false;
+	     		}
 	     }
-		
+
 		public boolean regExpValidator(String email) {
 			Pattern p = Pattern.compile("^(.+)@(.+)$");
 			Matcher m = p.matcher(email);
 			return m.matches();
 			}
 		
-		public void send(String email) throws AddressException, MessagingException {
+		public void send(String email) {
 			CodeGenerator cD = new CodeGenerator();
 		    //System.out.println("Подтвердите проверочный код:  - " + cD.getVerifyCode());
 			  String password = "<vc39hec";
-		      String to = email;
+		      final String to = email;
 		      final String from = "bms39rus@gmail.com";
 
 		      Properties properties = new Properties();
@@ -97,13 +88,22 @@ public class EmailCheckView extends Div {
 		                      return new PasswordAuthentication(from, password);
 		                  }
 		              });
-
 		      MimeMessage message = new MimeMessage(session);
-		      message.setFrom(new InternetAddress(from));
-		      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		      message.setSubject("Veryfing your email");
-		      message.setText(cD.getVerifyCode());
-
-		      Transport.send(message);
+		      
+		      try {
+				   message.setFrom(new InternetAddress(from));
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			       message.setSubject("Veryfing your email");
+			       message.setText(cD.getVerifyCode());
+			       Transport.send(message);
+			       } catch (AddressException e) {
+				            e.printStackTrace();
+				            Notification.show("AddressExeption");
+			       } catch (MessagingException e) {
+				           e.printStackTrace();
+				           Notification.show("MessagingException");
+			       }
+		     
+		      
 		}
 }
