@@ -2,6 +2,7 @@ package net.mike.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import net.mike.services.CodeGenerator;
@@ -12,7 +13,6 @@ public class EmailConfirmView extends Div {
 	public  EmailConfirmView() {
 	    TextField clientCode = new TextField("Insert verify code");
 	    Button button = new Button("Verify");
-	    		    	//if (clientCode.getValue().equals(CodeGenerator.getInstance().toString())) 
 	    	           
 	    
 	    setWidth("25%");
@@ -23,9 +23,15 @@ public class EmailConfirmView extends Div {
 	  
 	    add(clientCode, button);
 	    
-	    button.addClickListener(e -> {
-	    	if (clientCode.getValue().equals(CodeGenerator.getInstance().toString())) {
-	    		
+	    button.addClickListener(click -> {
+	    	if (clientCode.getValue().equals(CodeGenerator.getInstance())) {
+	    		button.getUI().ifPresent(ui -> ui.navigate("signup"));
+	    		Notification.show("Your email is verifyng");
+	    		}
+	    	else {
+	    		clientCode.clear();
+	    		Notification.show("Your email is NOT verifyng");
+	    		  
 	    	}
 	    });
   }
