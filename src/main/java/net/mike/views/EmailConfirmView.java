@@ -24,7 +24,7 @@ public class EmailConfirmView extends Div {
 	    add(clientCode, button);
 	    
 	    button.addClickListener(click -> {
-	    	if (clientCode.getValue().equals(CodeGenerator.getInstance())) {
+	    	if (clientCode.getValue().equals(CodeGenerator.getInstance().getCode())) {
 	    		button.getUI().ifPresent(ui -> ui.navigate("signup"));
 	    		Notification.show("Your email is verifyng");
 	    		}

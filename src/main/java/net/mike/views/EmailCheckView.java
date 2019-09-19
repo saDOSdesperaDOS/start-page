@@ -36,13 +36,11 @@ public class EmailCheckView extends Div {
 	//ТАК ОБРАБОТЧИК СОБЫТИЯ РАБОТАЕТ С ПЕРВОГО РАЗА	 
 		   checkEmailButton.addClickListener( e-> {
 			   										if(check(email.getValue())) {
-			   										
-															send(email.getValue());
 			   											Account.getInstance().setEmail(email.getValue());
 			   											checkEmailButton.getUI().ifPresent(ui -> ui.navigate("confirm"));
 			   										}
 	      	    							  	  }
-		                                      );
+		    );
 		     			setWidth("25%");
 		     			setHeight("65%");
 		     			getElement().getStyle().set("position", "absolute");
@@ -87,14 +85,15 @@ public class EmailCheckView extends Div {
 		                  protected PasswordAuthentication getPasswordAuthentication() {
 		                      return new PasswordAuthentication(from, password);
 		                  }
-		              });
+		               }
+		      );
 		      MimeMessage message = new MimeMessage(session);
 		      
 		      try {
 				   message.setFrom(new InternetAddress(from));
 				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			       message.setSubject("Veryfing your email");
-			       message.setText(CodeGenerator.getInstance());
+			       message.setText(CodeGenerator.getInstance().getCode());//!!!отсылает адрес обьекта в памяти, а не сам код
 			       Transport.send(message);
 			       } catch (AddressException e) {
 				            e.printStackTrace();
