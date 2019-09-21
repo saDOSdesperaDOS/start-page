@@ -31,6 +31,7 @@ public class SignUpFormView extends VerticalLayout {
 			  		Account.getInstance().setName(name.getValue());
 					accountsService.create(Account.getInstance());
 					Notification.show("Your account created.");
+					b.getUI().ifPresent(ui -> ui.navigate("login"));
 			  });
 		  
 		  setWidth("25%");
