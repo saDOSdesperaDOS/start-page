@@ -17,7 +17,7 @@ public class SignUpFormView extends VerticalLayout {
 	
 	public SignUpFormView() {
 		
-		FormLayout form = new FormLayout();
+		final FormLayout form = new FormLayout();
 		TextField name = new TextField("Name");
 		PasswordField pass = new PasswordField("Password");
 		PasswordField confirmPass = new PasswordField("Confirm Password");

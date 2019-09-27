@@ -26,7 +26,7 @@ public class MainView extends HorizontalLayout {
                getElement().getStyle().set("margin-left", "84%");
               
                b1.addClickListener( e-> { 
-            	   b1.getUI().ifPresent(ui -> ui.navigate("signin")); 
+            	   b1.getUI().ifPresent(ui -> ui.navigate("login")); 
                });
                b2.addClickListener( e-> { 
             	   b2.getUI().ifPresent(ui -> ui.navigate("check")); 

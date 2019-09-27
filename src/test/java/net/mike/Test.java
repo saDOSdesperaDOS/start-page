@@ -3,6 +3,8 @@
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import com.vaadin.flow.component.login.LoginForm;
+
 import net.mike.entities.Account;
 import net.mike.services.AccountsService;
 import net.mike.services.CodeGenerator;
@@ -18,9 +20,11 @@ public class Test {
 	 System.out.println(sqlRequest.create(account));*/
 	 // sqlRequest.remove(2);
 	  //System.out.println(sqlRequest.getAllEmail());
-    System.out.println(CodeGenerator.getInstance().getCode());
-    System.out.println(CodeGenerator.getInstance().getCode().equals("PvEov3RErPotQrjt"));
+    //System.out.println(CodeGenerator.getInstance().getCode());
+    //System.out.println(CodeGenerator.getInstance().getCode().equals("PvEov3RErPotQrjt"));
     
-    
-  }
-}
+	  LoginForm lgF = new LoginForm();
+	  System.out.println(lgF.getElement().getText());
+		
+		
+}}
